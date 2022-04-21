@@ -93,9 +93,11 @@ class Resync:
             return nodes
 
     def cleanup(self):
+        temp_nodes = existing_nodes.copy() #copy nodes
         for n in self.existing_nodes.values():
             if n.height < self.minimum_height and n.address not in self.cfg_nodes:
-                self.existing_nodes.pop(n.address)
+                self.temp_nodes.pop(n.address)
+        existing_nodes = temp_nodes.copy() #update nodes
 
     def connect_to_known_nodes(self):
         now = time.monotonic()
