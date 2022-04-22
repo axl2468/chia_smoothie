@@ -119,7 +119,7 @@ class Resync:
 
         remaining = int((config.CFG["min_connections"] - len(self.currently_connected))*0.5)
         if remaining > 0:
-            for _ in range(remaining+1):
+            for _ in range(remaining):
                 try:
                     node = next(node_chain)
                     node.connect()
