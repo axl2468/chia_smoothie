@@ -119,9 +119,12 @@ class Resync:
 
         remaining = int((config.CFG["min_connections"] - len(self.currently_connected))*0.5)
         if remaining > 0:
-            for _ in range(remaining):
-                node = next(node_chain)
-                node.connect()
+            for _ in range(remaining+1):
+                try:
+                    node = next(node_chain)
+                    node.connect()
+                except:
+                    break
 
     def update_state(self):
         chia_state = rpc_api.ChiaAPI.get_blockchain_state()
